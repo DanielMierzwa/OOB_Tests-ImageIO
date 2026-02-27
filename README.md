@@ -12,14 +12,14 @@ Obiektem testów będzie biblioteka ImageIO: https://pypi.org/project/ImageIO/
 ### Zakres podstawowy (obowiązkowy)
 Projekt obejmuje testowanie najnowszej stabilnej wersji wybranego modułu z PyPI.
 Wymagania minimalne:
-1. Repozytorium
+#### 1. Repozytorium
   Repozytorium powinno zawierać:
   * README z opisem projektu i strategii testowej
   * opis podziału ról w zespole
   * strukturę katalogów projektu
   * dokument z opisem scenariuszy testów akceptacyjnych
   * Pipeline (GitHub Actions)
-1. Pipeline powinna:
+#### 2. Pipeline powinna:
   * być uruchamiana manualnie
   * instalować wskazany moduł z PyPI
   * uruchamiać testy jednostkowe biblioteki (jeśli są dostępne)
@@ -28,21 +28,21 @@ Wymagania minimalne:
   * wyświetlać czytelne podsumowanie wyników
   Pipeline ma być prosta i przejrzysta. Nie wymagamy Dockerów, matrix buildów ani wielosystemowych
   konfiguracji.
-1. Testy funkcjonalne
+#### 3. Testy funkcjonalne
   Każdy zespół przygotowuje:
   * 3–5 testów funkcjonalnych
   Testy powinny:
   * sprawdzać realne użycie modułu
   * mieć uzasadnienie (dlaczego akurat te scenariusze)
   * być czytelne i dobrze nazwane
-1. Testy wydajnościowe
+#### 4. Testy wydajnościowe
   Każdy zespół przygotowuje:
   * 1–2 proste testy wydajnościowe
   Nie wymagamy profesjonalnych benchmarków. Wystarczy:
   * pomiar czasu wykonania wybranej operacji
   * zapis wyniku do loga
   * proste porównanie wyników
-1. Scenariusze testów akceptacyjnych
+#### 5. Scenariusze testów akceptacyjnych
   Należy przygotować dokument zawierający:
   * co najmniej 3 scenariusze testów akceptacyjnych
   * opis celu testu
