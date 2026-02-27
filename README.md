@@ -51,14 +51,14 @@ Wymagania minimalne:
   Nie muszą być one automatyzowane.
 ### 🏆 Opcja dla grup celujących w ocenę celującą
 Dla zespołów ambitnych przewidziana jest możliwość rozszerzenia projektu:
-🔧 Budowanie modułu z wybranego commita na GitHubie
+#### 🔧 Budowanie modułu z wybranego commita na GitHubie
 Zamiast instalować wersję z PyPI, zespół może:
- pobrać wybrany commit z oficjalnego repozytorium GitHub modułu
- zbudować go lokalnie
- przetestować go przy użyciu swojej pipeline
+* pobrać wybrany commit z oficjalnego repozytorium GitHub modułu
+* zbudować go lokalnie
+* przetestować go przy użyciu swojej pipeline
 Wymaga to:
- zrozumienia zależności
- rozwiązania ewentualnych problemów buildowych
- udokumentowania procesu
+* zrozumienia zależności
+* rozwiązania ewentualnych problemów buildowych
+* udokumentowania procesu
 To rozszerzenie jest dobrowolne i przewidziane dla zespołów chcących celować w ocenę najwyższą. 
 
