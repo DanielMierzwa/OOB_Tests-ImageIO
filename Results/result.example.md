@@ -4,7 +4,8 @@
 
 **Build Status:** ![Pass](https://img.shields.io/badge/Status-Passed-success?style=flat-square) ![Coverage](https://img.shields.io/badge/Coverage-92%25-green?style=flat-square)
 
-**Metadata:** ![PyPI version](https://img.shields.io/pypi/v/imageio?style=flat-square) ![Python versions](https://img.shields.io/pypi/pyversions/imageio?style=flat-square) ![Python package license](https://img.shields.io/pypi/l/imageio?style=flat-square)
+**Metadata:** ![PyPI version](https://img.shields.io/pypi/v/imageio?style=flat-square) ![Python versions](https://img.shields.io/pypi/pyversions/imageio?style=flat-square) ![PyPI - License](https://img.shields.io/pypi/l/imageio?style=flat-square)
+
 
 ---
 
