@@ -4,7 +4,7 @@ Testy na lekcję Testowania i Dokumentacji Aplikacji.
 Obiektem testów będzie biblioteka ImageIO: https://pypi.org/project/ImageIO/
 
 ## Członkowie zespołu
-1. Daniel Mierzwa
+1. Daniel Mierzwa 
 1. Szymon Rospondek
 1. Filip Walczak
 
@@ -62,5 +62,6 @@ Wymaga to:
   * zrozumienia zależności
   * rozwiązania ewentualnych problemów buildowych
   * udokumentowania procesu
-To rozszerzenie jest dobrowolne i przewidziane dla zespołów chcących celować w ocenę najwyższą. 
+To rozszerzenie jest dobrowolne i przewidziane dla zespołów chcących celować w ocenę najwyższą.
 
+Tesdsdsd
