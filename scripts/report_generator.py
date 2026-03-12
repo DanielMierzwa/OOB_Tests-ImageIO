@@ -1,6 +1,6 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
-from sys import platform
+import platform
 from importlib.metadata import version
 import xml.etree.ElementTree as ET
 import os, sys
@@ -93,7 +93,7 @@ def create_enviroment_details(output_file):
         f.write("\n\n---\n\n")
 
 def create_failure_report(output_file, test_results):
-    if test_results["failed_tests"]:
+    if not test_results["failed_tests"]:
         return
     
     with open(output_file, 'a') as f:
