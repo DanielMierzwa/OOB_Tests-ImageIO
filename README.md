@@ -14,7 +14,7 @@ Szymon Rospondek -- Tech Lead, DevOps,Developer
 
 Daniel Mierzwa -- Product Owner,Developer
 
-Filip Walczak -- Raportowanie, Dokumentacja,Developer
+Filip Walczak -- Tester, Dokumentacja,Developer
 
 # 3. Kanał Komunikacji
 
@@ -44,10 +44,6 @@ Funkcja służąca do zapisywania obrazu do pliku. Przyjmuje dane obrazu (np. ta
 ### 5. imageio.v3.imwrite
 
 Funkcja służąca do zapisywania obrazu do pliku. Przyjmuje dane obrazu (najczęściej tablicę NumPy) i zapisuje je w wybranym formacie graficznym, np. PNG, JPG lub TIFF. Umożliwia także ustawienie różnych parametrów zapisu zależnych od formatu pliku.
-
-## § Cele
-
-
 ## § Rodzaje Testów
 
   Testy funkcjonalne
@@ -55,14 +51,33 @@ Funkcja służąca do zapisywania obrazu do pliku. Przyjmuje dane obrazu (najcz�
   Testy wydajnościowe
   
   Testy akceptacyjne
-
-## $ Kryteria Sukcesu
-
-
 # 5. Struktura Projektu
-
-
-
+```
+OOB_Tests-ImageIO/
+│
+├──  README.md
+├──  README_TASK.md
+├──  Pipeline.py
+│
+├──  .github/
+│
+├── AcceptanceTests/
+│
+├── Results/
+│
+├──  scripts/
+│
+└──  tests/
+```
 # 6. Harmonogram
+1.Stworzyć pipeline (zrobione)
 
-Każda sobota(od dnia 07.03.2026) z wyłączeniem świąt 
+2.Stworzyć testy funkcjonalne i dokumuntacje(Marzec)
+
+3. Stworzyć testy wydajnościowe i dokumentacje
+   
+4. Sprawdzenie i poprawki kodu
+   
+5. Stworzyć testy akceptacyjne i dokumentacje
+   
+6. Stworzyć reszte dokumentacji i przygotować finalną wersje finalnej wersji
