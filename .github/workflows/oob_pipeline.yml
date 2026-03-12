@@ -16,8 +16,12 @@ jobs:
       - name: Install dependencies
         run: |
           pip install imageio pytest pytest-cov
-
+          
+      - name: List files
+        run: ls -R
+        
       - name: Run Functional & Performance Tests
+      
         run: |
           pytest tests/ --cov=imageio --cov-report=xml:coverage.xml --junitxml=results.xml
         continue-on-error: false
