@@ -1,4 +1,5 @@
 import imageio.v3 as iio
+from pathlib import Path
 import os
 
 # oczekiwane dane
@@ -25,8 +26,8 @@ def test_immeta():
     """
     failed_images=[]
     for image_name, expected in expected_metadata.items():
-
-        meta = iio.immeta(image_name)
+        script_path=str(Path(__file__).parent)
+        meta = iio.immeta(script_path+"\\"+image_name)
         test_passed = True
         #\033[31m - daje kolor czerwony, \033[0m - a to biały
         for key, value in expected.items():
@@ -57,7 +58,8 @@ def read_meta(filepath):
     """
     Reads metadata from a file and formats it to paste in dictionary.
     """
-    meta = iio.immeta(filepath)
+    script_path = str(Path(__file__).parent)
+    meta = iio.immeta(script_path+filepath)
     meta_dict = {
         "mode": meta.get("mode"),
         "shape": meta.get("shape"),
