@@ -24,7 +24,7 @@
 
 ## Test Environment Details
 
-**Timestamp:** `2026-03-03 16:45`  
+**Timestamp:** `2026-03-03 16:45`
 **Environment:** `Python [Version] | [OS Name]`
 
 * **Host:** `[Hostname/CI-Runner-ID]`
