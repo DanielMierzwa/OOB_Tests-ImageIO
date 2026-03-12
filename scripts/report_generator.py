@@ -1,5 +1,5 @@
 from datetime import datetime
-from zoneinfo import ZoneInfo
+from datetime import datetime, timezone, timedelta
 import platform
 from importlib.metadata import version
 import xml.etree.ElementTree as ET
@@ -14,10 +14,14 @@ def get_test_results(xml_file):
     tree = ET.parse(xml_file)
     root = tree.getroot()
 
-    total_tests = int(root.attrib.get('tests', 0))
-    failures = int(root.attrib.get('failures', 0))
-    errors = int(root.attrib.get('errors', 0))
-    skipped = int(root.attrib.get('skipped', 0))
+    total_tests = failures = errors = skipped = 0
+
+    for testsuite in root.iter('testsuite'):
+        total_tests += int(testsuite.attrib.get('tests', 0))
+        failures += int(testsuite.attrib.get('failures', 0))
+        errors += int(testsuite.attrib.get('errors', 0))
+        skipped += int(testsuite.attrib.get('skipped', 0))
+
     passed = total_tests - failures - errors - skipped
 
     time = root.attrib.get('time', '0')
@@ -56,7 +60,7 @@ def create_header(output_file, test_results, coverage_data):
 
     color = "green" if coverage_data['percentage'] > 90 else "yellow" if coverage_data['percentage'] > 75 else "red"
     
-    with open(output_file, 'w') as f:
+    with open(output_file, 'w', encoding='utf-8') as f:
         f.write("# Wyniki testów: [ImageIO](https://pypi.org/project/ImageIO/)\n\n" + " ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)\n\n")
         f.write("**Build Status:** " + 
                 f"![{pass_badge[0]}](https://img.shields.io/badge/Status-{pass_badge[0]}-{pass_badge[1]}?style=flat-square)" + 
@@ -83,7 +87,9 @@ def create_test_summary(output_file, test_results):
 def create_enviroment_details(output_file):
     with open(output_file, 'a') as f:
         f.write("## Test Environment Details\n\n")
-        f.write(f"**Timestamp:** `{datetime.now(ZoneInfo('Europe/Warsaw')).strftime('%Y-%m-%d %H:%M')}`\n")
+        now = datetime.now()
+        pl_time = now.astimezone(timezone(timedelta(hours=1))) if now.astimezone().tzname() != 'CET' else now
+        f.write(f"**Timestamp:** `{pl_time.strftime('%Y-%m-%d %H:%M')}`\n")
         f.write(f"**Environment:** `Python {sys.version.split()[0]} | {platform.system()} {platform.release()}`\n\n")
         f.write(f"* **Host:** `{os.getenv('RUNNER_NAME', 'GitHub-Runner')}`\n" + 
                 f"* **Interpreter:** `CPython {sys.version.split()[0]}`\n" +
