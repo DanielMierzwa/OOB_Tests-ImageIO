@@ -43,4 +43,5 @@ jobs:
           path: |
             raport.md
             coverage.xml
+            results.xml
           retention-days: 7
