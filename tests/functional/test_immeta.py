@@ -49,7 +49,7 @@ def test_immeta():
         if not test_passed:
             failed_images.append(image_name)
     if len(failed_images)>0:
-        print("\033[31m<test_immeta failed> images:",failed_images,"\033[0m")
+        raise ValueError("<test_immeta failed> images:"+str(failed_images))
     else:
         print("\033[32m<test_immeta passed>\033[0m")
 
