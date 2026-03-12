@@ -27,7 +27,7 @@ def test_immeta():
     failed_images=[]
     for image_name, expected in expected_metadata.items():
         script_path=str(Path(__file__).parent)
-        meta = iio.immeta(script_path+"\\"+image_name)
+        meta = iio.immeta(script_path+"/"+image_name)
         test_passed = True
         #\033[31m - daje kolor czerwony, \033[0m - a to biały
         for key, value in expected.items():
