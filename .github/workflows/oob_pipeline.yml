@@ -16,9 +16,6 @@ jobs:
       - name: Install dependencies
         run: |
           pip install imageio pytest pytest-cov
-          
-      - name: List files
-        run: ls -R
         
       - name: Run Functional & Performance Tests
       
