@@ -41,7 +41,7 @@ def get_coverage_data(cov_file):
     root = tree.getroot()
 
     line_rate = float(root.attrib.get('line-rate', 0))
-    percentage = round(line_rate * 100,2 )
+    percentage = round(line_rate * 100, 2)
     
     return {
         "line_rate": line_rate,
