@@ -83,7 +83,7 @@ def create_test_summary(output_file, test_results):
 def create_enviroment_details(output_file):
     with open(output_file, 'a') as f:
         f.write("## Test Environment Details\n\n")
-        f.write(f"**Timestamp:** `{datetime.now(ZoneInfo('Europe/Warsaw')).strftime("%Y-%m-%d %H:%M")}`\n")
+        f.write(f"**Timestamp:** `{datetime.now(ZoneInfo('Europe/Warsaw')).strftime('%Y-%m-%d %H:%M')}`\n")
         f.write(f"**Environment:** `Python {sys.version.split()[0]} | {platform.system()} {platform.release()}`\n\n")
         f.write(f"* **Host:** `{os.getenv('RUNNER_NAME', 'GitHub-Runner')}`\n" + 
                 f"* **Interpreter:** `CPython {sys.version.split()[0]}`\n" +
