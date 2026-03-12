@@ -5,15 +5,42 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v4
-        with: {python-version: '3.10'}
+        with:
+          python-version: '3.10'
+
       - name: Install dependencies
         run: |
           pip install imageio pytest pytest-cov
+
       - name: Run Functional & Performance Tests
         run: |
-          pytest tests/ --cov=imageio --cov-report=xml
+          pytest tests/ --cov=imageio --cov-report=xml --junitxml=results.xml
+        continue-on-error: false
+
       - name: Generate MD Report
+        if: always()
         run: python scripts/report_generator.py
+
+      - name: Publish Summary to GitHub UI
+        if: always()
+        run: |
+          if [ -f raport.md ]; then
+            cat raport.md >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## Błąd: Plik raport.md nie został wygenerowany!" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Archive Test Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testing-outputs
+          path: |
+            raport.md
+            coverage.xml
+          retention-days: 7
