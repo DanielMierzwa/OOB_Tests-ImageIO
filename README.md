@@ -1,5 +1,5 @@
 # 1.Opis projektu
-Projekt OOB_Tests-ImageIO ma na celu testowanie biblioteki ImageIO, szczególnie w kontekście testów Out-of-Bounds (OOB) - czyli testów sprawdzających zachowanie systemu przy dostępie do pamięci poza dozwolonymi granicami. Celem jest:
+Projekt OOB_Tests-ImageIO ma na celu testowanie biblioteki ImageIO, szczególnie w kontekście testów Out-of-Box (OOB) - czyli testów sprawdzających zachowanie systemu przy dostępie do pamięci poza dozwolonymi granicami. Celem jest:
 
 Identyfikacja błędów i luk w zabezpieczeniach
 
