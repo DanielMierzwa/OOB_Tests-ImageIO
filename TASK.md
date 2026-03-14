@@ -63,5 +63,3 @@ Wymaga to:
   * rozwiązania ewentualnych problemów buildowych
   * udokumentowania procesu
 To rozszerzenie jest dobrowolne i przewidziane dla zespołów chcących celować w ocenę najwyższą.
-
-Tesdsdsd
