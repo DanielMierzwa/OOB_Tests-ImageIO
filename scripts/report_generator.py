@@ -14,17 +14,16 @@ def get_test_results(xml_file):
     tree = ET.parse(xml_file)
     root = tree.getroot()
 
-    total_tests = failures = errors = skipped = 0
+    total_tests = failures = errors = skipped = time = 0
 
     for testsuite in root.iter('testsuite'):
         total_tests += int(testsuite.attrib.get('tests', 0))
         failures += int(testsuite.attrib.get('failures', 0))
         errors += int(testsuite.attrib.get('errors', 0))
         skipped += int(testsuite.attrib.get('skipped', 0))
+        time += float(testsuite.attrib.get('time', 0))
 
     passed = total_tests - failures - errors - skipped
-
-    time = root.attrib.get('time', '0')
 
     return {
         "total": total_tests,
