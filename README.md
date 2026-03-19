@@ -25,10 +25,14 @@ Filip Walczak -- Tester, Dokumentacja,Developer
 OOB_Tests-ImageIO/
 │
 ├──  README.md
-├──  README_TASK.md
+│
+├──  INFO.md
+│
+├──.gitignore
+│
 ├──  Pipeline.py
 │
-├──  .github/
+├──  .github/workflows
 │
 ├── AcceptanceTests/
 │
