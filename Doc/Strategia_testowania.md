@@ -1,1 +1,31 @@
+# Strategia Testowania
 
+## § Plan zakłada przetestowanie działania 5 modułów : 
+
+### 1. imageio.v3.immeta
+   
+Funkcja służąca do odczytywania metadanych obrazu bez wczytywania całego pliku do pamięci. Zwraca informacje takie jak np. rozmiar obrazu, format czy inne dane zapisane w pliku.
+
+### 2. imageio.v3.imread
+
+Funkcja używana do wczytywania obrazu z pliku (np. PNG, JPG) do tablicy NumPy. Dzięki temu obraz można dalej analizować lub przetwarzać w Pythonie.
+
+### 3. imageio.plugins.pillow.PillowPlugin
+
+Plugin biblioteki ImageIO oparty na bibliotece Pillow. Odpowiada za obsługę wielu popularnych formatów obrazów (np. JPEG, PNG, GIF) podczas ich wczytywania i zapisywania.
+
+### 4. imageio.v3.imwrite
+
+Funkcja służąca do zapisywania obrazu do pliku. Przyjmuje dane obrazu (np. tablicę NumPy) i zapisuje je w wybranym formacie graficznym.
+
+### 5. imageio.v3.imwrite
+
+Funkcja służąca do zapisywania obrazu do pliku. Przyjmuje dane obrazu (najczęściej tablicę NumPy) i zapisuje je w wybranym formacie graficznym, np. PNG, JPG lub TIFF. Umożliwia także ustawienie różnych parametrów zapisu zależnych od formatu pliku.
+
+## § Rodzaje Testów
+
+  Testy funkcjonalne
+  
+  Testy wydajnościowe
+  
+  Testy akceptacyjne
