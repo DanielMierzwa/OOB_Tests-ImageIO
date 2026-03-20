@@ -3,7 +3,7 @@
 ![Python Version](https://img.shields.io/badge/python-3.x-blue?style=flat-square&logo=python)
 
 ## 1. Opis projektu
-Projekt **OOB_Tests-ImageIO** ma na celu testowanie biblioteki ImageIO, ze szczególnym uwzględnieniem testów **Out-of-Box (OOB)** – czyli testów sprawdzających zachowanie systemu przy dostępie do pamięci poza dozwolonymi granicami. Główne cele projektu to:
+Projekt **OOB_Tests-ImageIO** ma na celu testowanie biblioteki ImageIO, ze szczególnym uwzględnieniem testów **Out-of-Box (OOB)** – czyli testów sprawdzających zachowanie systemu przy dostępie do pamięci poza dozwolonymi granicami.
 
 ## 2. Zespół i Podział Ról
 
