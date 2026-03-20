@@ -8,6 +8,8 @@
 5. Po uruchomienu zostaniesz przeniesiony na strone tego konkretnego workflow. Po zakończeniu testów wyświetli się tam podsumowanie w postaci pliku `raport.md`, oraz możliwość pobrania artefaktów testu. Artefakty to pliki: `raport.md` z raportem testów, `coverage.xml` z statystykami wykorzystania kodu biblioteki oraz `results.xml` z danymi o przeprowadzonych testach. Artefakty przechowywane są przez 7 dni od wykonania testów.
 
 ## Lokalnie (na swoim komputerze)
+
+### Korzystając z konsoli
 1. Upewnij się, że masz zainstalowane wszystkie potrzebne biblioteki python oraz interpreter pythona.
 
     ```pip install imageio pytest pytest-cov```
@@ -17,3 +19,11 @@
 3. Aby wygenerować raport użyj komendy
 
     ```python ./scripts/report_generator.py```
+
+### Korzystając z pliku `run_tests.py`
+1. Upewnij się, że masz zainstalowane wszystkie potrzebne biblioteki python oraz interpreter pythona.
+
+    ```pip install imageio pytest pytest-cov```
+2. Uruchom plik `run_tests.py`
+
+    ```python ./runtests.py``` lub poprzez np. Visual Studio Code

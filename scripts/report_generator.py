@@ -1,9 +1,8 @@
 from datetime import datetime
 from datetime import datetime, timezone, timedelta
-import platform
 from importlib.metadata import version
 import xml.etree.ElementTree as ET
-import os, sys
+import os, sys, platform
 
 
 def get_test_results(xml_file):
