@@ -36,7 +36,7 @@ OOB_Tests-ImageIO/
 │
 ├── INFO.md               # Instrukcje uruchamiania testów w GitHub Actions oraz lokalnie
 ├── README.md             # Główny plik dokumentacji projektu (ten plik)
-├── run_tests.py           # Skrypt uruchomieniowy dla testó lokalnych
+├── run_tests.py          # Skrypt uruchomieniowy dla testów lokalnych
 └── .gitignore            # Konfiguracja ignorowanych plików przez Git
 ```
 
