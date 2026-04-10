@@ -11,14 +11,16 @@ Projekt **OOB_Tests-ImageIO** ma na celu testowanie biblioteki ImageIO, ze szcze
 ### **Szymon Rospondek** [![GitHub](https://img.shields.io/badge/@NiskiSzymus-24292e?style=flat-square&logo=github&logoColor=white)](https://github.com/NiskiSzymus)
 **Tech Lead**, **DevOps**, **Developer**<br>Architektura, decyzje technologiczne, utrzymanie CI/CD, konfiguracja środowisk, implementacja testów.
 
-
 ### **Daniel Mierzwa** [![GitHub](https://img.shields.io/badge/@DanielMierzwa-24292e?style=flat-square&logo=github&logoColor=white)](https://github.com/DanielMierzwa)
 **Product Owner**, **Developer**<br>Zarządzanie backlogiem, definiowanie celów biznesowych i wymagań, implementacja logiki testów.
+
 ### **Filip Walczak** [![GitHub](https://img.shields.io/badge/@FILIPWXD-24292e?style=flat-square&logo=github&logoColor=white)](https://github.com/FILIPWXD)
 **Tester**, **Dokumentacja**, **Developer**<br>Projektowanie i wykonywanie przypadków testowych, dbanie o kompletność i przejrzystość dokumentacji, wsparcie w pisaniu kodu.
 
 ## 3. Kanał Komunikacji
 [![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com)
+
+Cotygodniowe **spotkania online** odbywają się w **środy w godzinach 18:00 - 19:00**. Pozostałe spotkania członkowie zespołu organizują we własnym zakresie.
 
 ## 4. Struktura Projektu
 
