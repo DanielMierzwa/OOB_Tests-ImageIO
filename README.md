@@ -23,7 +23,7 @@ Projekt **OOB_Tests-ImageIO** ma na celu testowanie biblioteki ImageIO, ze szcze
 Cotygodniowe **spotkania online** odbywają się w **środy w godzinach 18:00 - 19:00**. Pozostałe spotkania członkowie zespołu organizują we własnym zakresie.
 
 ## 4. Harmonogram
-Plan pracy jest prowadzony za pomocą wbudowanych narzędzi Gihuba: [![Github](https://github.com/users/DanielMierzwa/projects/2/)
+Plan pracy jest prowadzony za pomocą wbudowanych narzędzi Gihuba: [![Project Board](https://img.shields.io/badge/Project-View-blue?style=for-the-badge&logo=github)](https://github.com/users/DanielMierzwa/projects/2/views)
 
 ## 4. Struktura Projektu
 
