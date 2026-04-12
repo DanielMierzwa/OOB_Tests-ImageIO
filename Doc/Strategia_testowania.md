@@ -14,9 +14,6 @@ Funkcja służąca do zapisywania obrazu do pliku. Przyjmuje dane obrazu (najcz�
 ### 4. imageio.plugins.pillow.PillowPlugin
 Plugin biblioteki ImageIO oparty na bibliotece Pillow. Odpowiada za obsługę wielu popularnych formatów obrazów (np. JPEG, PNG, GIF) podczas ich wczytywania i zapisywania.
 
-### 5. imageio.plugins.tifffile.TifffilePlugin
-Plugin biblioteki ImageIO oparty na bibliotece tifffile. Odpowiada za kompleksową obsługę plików TIFF.
-
 ## § Testy funkcjonalne
 
 ### 1. Analiza metadanych obrazów
@@ -25,13 +22,10 @@ Testowanie poprawnego odczytu i weryfikacji metadanych z plików graficznych (np
 ### 2. Test Round-Trip (Tablica -> Zapis -> Obraz -> Odczyt -> Tablica)
 Test weryfikujący poprawność działania połączonego zapisu i odczytu. Polega na zapisaniu wygenerowanej w pamięci tablicy pikseli do pliku za pomocą funkcji `imwrite`, a następnie bezbłędnym odczycie tych samych danych z powrotem przy użyciu `imread`.
 
-### 3. Test obsługi plików wielowarstwowych (Testy wolumetryczne)
-Test nakierowany na weryfikację wydajności oraz niezawodności pracy z wtyczką `TifffilePlugin` podczas obsługi plików wielowarstwowych np. TIFF.
-
-### 4. Testy obsługi kanałów (Barwy, Alpha, Grayscale)
+### 3. Testy obsługi kanałów (Barwy, Alpha, Grayscale)
 Ocena procedury zapisu i odczytu plików powiązanych z różnymi paletami barw oraz kanałem przezroczystości (ang. Alpha channel), sprawdzając poprawne alokowanie w trójwymiarowych tablicach w użyciu z `imread` oraz `imwrite`.
 
-### 5. Testy Round-Trip konwertujące formaty barw (np. RGB -> CMYK -> RGB)
+### 4. Testy Round-Trip konwertujące formaty barw (np. RGB -> CMYK -> RGB)
 Ocena możliwości `PillowPlugin` w zakresie konwersji formatów barw, np. z CMYK do RGB. Sprawdzić czy kolory po powrocie do RGB są maksymalnie zbliżone.
 
 ## § Testy wydajnościowe
