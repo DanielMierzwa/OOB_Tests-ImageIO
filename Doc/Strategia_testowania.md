@@ -31,8 +31,8 @@ Test nakierowany na weryfikację wydajności oraz niezawodności pracy z wtyczk�
 ### 4. Testy obsługi kanałów (Barwy, Alpha, Grayscale)
 Ocena procedury zapisu i odczytu plików powiązanych z różnymi paletami barw oraz kanałem przezroczystości (ang. Alpha channel), sprawdzając poprawne alokowanie w trójwymiarowych tablicach w użyciu z `imread` oraz `imwrite`.
 
-### 5. Testy konwertujące formaty barw (np. CMYK -> RGB)
-Ocena możliwości `PillowPlugin` w zakresie konwersji formatów barw, np. z CMYK do RGB.
+### 5. Testy Round-Trip konwertujące formaty barw (np. RGB -> CMYK -> RGB)
+Ocena możliwości `PillowPlugin` w zakresie konwersji formatów barw, np. z CMYK do RGB. Sprawdzić czy kolory po powrocie do RGB są maksymalnie zbliżone.
 
 ## § Testy wydajnościowe
 
