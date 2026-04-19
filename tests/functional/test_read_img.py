@@ -23,7 +23,7 @@ def test_read_img():
 def test_imread_from_internet():
     """Test loading an image from the internet."""
     # Using a small PNG image from a reliable source
-    url = 'https://github.com/DanielMierzwa/OOB_Tests-ImageIO/blob/feature/test_read_img.py/tests/functional/test_immeta_source/test_immeta_source1.jpg'
+    url = 'https://github.com/DanielMierzwa/OOB_Tests-ImageIO/blob/feature/test_read_img.py/tests/functional/test_immeta_source/test_immeta_source1.jpg?raw=true'
 
     im = iio.imread(url)
     assert im is not None
