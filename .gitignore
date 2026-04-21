@@ -69,3 +69,4 @@ venv.bak/
 
 # Windows
 Thumbs.db
+/.vs
