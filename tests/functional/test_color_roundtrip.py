@@ -73,7 +73,7 @@ def _roundtrip_rgb_via_cmyk_tiff(rgb: np.ndarray, tmp_path: Path) -> np.ndarray:
     assert out_file.exists(), "Output file was not created."
 
     with Image.open(out_file) as saved_img:
-        assert saved_img.mode == "CMYK", f"Expected saved image mode to be CMYK, but got {saved_img.mode}"
+        assert saved_img.mode == "CMYK", f"Oczekiwany tryb obrazu zapisanego to CMYK, ale otrzymano {saved_img.mode}"
 
     return iio.imread(out_file, plugin='pillow', mode="RGB")
 
@@ -83,14 +83,14 @@ def test_rgb_cmyk_roundtrip_preserves_reference_swatches(tmp_path):
     original = _build_color_chart()
     roundtrip = _roundtrip_rgb_via_cmyk_tiff(original, tmp_path)
 
-    assert roundtrip.shape == original.shape, f"Roundtrip image shape {roundtrip.shape} does not match original shape {original.shape}"
-    assert roundtrip.dtype == np.uint8, f"Roundtrip image dtype {roundtrip.dtype} is not uint8"
+    assert roundtrip.shape == original.shape, f"Kształt obrazu po konwersji {roundtrip.shape} nie zgadza się z oczekiwanym {original.shape}"
+    assert roundtrip.dtype == np.uint8, f"Dtype obrazu po konwersji {roundtrip.dtype} nie zgadza się z oczekiwanym uint8"
 
     max_diff = _max_abs_diff(original, roundtrip)
     mean_diff = _mean_abs_diff(original, roundtrip)
 
-    assert max_diff <= 1, f"Max absolute difference {max_diff} exceeds threshold of 1"
-    assert mean_diff <= 0.5, f"Mean absolute difference {mean_diff} exceeds threshold of 0.5"
+    assert max_diff <= 1, f"Maksymalna różnica bezwzględna {max_diff} przekracza próg 1"
+    assert mean_diff <= 0.5, f"Średnia różnica bezwzględna {mean_diff} przekracza próg 0.5"
 
 
 
@@ -108,9 +108,9 @@ def test_rgb_cmyk_rgb_roundtrip_matches_in_memory_pillow_conversion(tmp_path):
 
     roundtrip = _roundtrip_rgb_via_cmyk_tiff(original, tmp_path)
 
-    assert roundtrip.shape == expected_rgb.shape, f"Roundtrip image shape {roundtrip.shape} does not match expected shape {expected_rgb.shape}"
-    assert roundtrip.dtype == expected_rgb.dtype == np.uint8, f"Roundtrip image dtype {roundtrip.dtype} is not uint8"
+    assert roundtrip.shape == expected_rgb.shape, f"Kształt obrazu po konwersji {roundtrip.shape} nie zgadza się z oczekiwanym {expected_rgb.shape}"
+    assert roundtrip.dtype == expected_rgb.dtype == np.uint8, f"Dtype obrazu po konwersji {roundtrip.dtype} nie zgadza się z oczekiwanym uint8"
 
     max_diff = _max_abs_diff(expected_rgb, roundtrip)
-    assert max_diff <= 1, f"Max absolute difference {max_diff} exceeds threshold of 1"
+    assert max_diff <= 1, f"Maksymalna różnica bezwzględna {max_diff} przekracza próg 1"
 
