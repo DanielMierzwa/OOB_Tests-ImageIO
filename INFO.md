@@ -26,4 +26,4 @@
     ```pip install imageio pytest pytest-cov```
 2. Uruchom plik `run_tests.py`
 
-    ```python ./runtests.py``` lub poprzez np. Visual Studio Code
+    ```python ./run_tests.py``` lub poprzez np. Visual Studio Code
