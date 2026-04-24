@@ -4,6 +4,8 @@ import imageio.v3 as iio
 import numpy as np
 from PIL import Image
 
+
+# Funkcja pomocnicza, która zapewnia, że obraz jest w formacie RGB (3 kanały).
 def _ensure_rgb(image: np.ndarray) -> np.ndarray:
     if image.ndim == 2:
         return np.stack([image, image, image], axis=-1)
@@ -11,6 +13,8 @@ def _ensure_rgb(image: np.ndarray) -> np.ndarray:
         return image[:, :, :3]
     return image
 
+
+# Tworzy zestaw kontrolnych próbek kolorów, który obejmuje podstawowe kolory.
 def _build_color_chart() -> np.ndarray:
     color_chart = np.array(
         [
@@ -36,12 +40,20 @@ def _build_color_chart() -> np.ndarray:
 
     return np.repeat(np.repeat(color_chart, 32, axis=0), 32, axis=1)
 
+
+# Oblicza maksymalną bezwzględną różnicę między dwoma obrazami.
+# Potrzebne do oceny odchylenia kolorów po konwersji.
 def _max_abs_diff(a: np.ndarray, b: np.ndarray) -> int:
     return int(np.abs(a.astype(np.int16) - b.astype(np.int16)).max())
 
+
+# Oblicza średnią bezwzględną różnicę między dwoma obrazami.
+# Potrzebne do oceny odchylenia kolorów po konwersji.
 def _mean_abs_diff(a: np.ndarray, b: np.ndarray) -> float:
     return float(np.abs(a.astype(np.int16) - b.astype(np.int16)).mean())
 
+
+# Wykonuje konwersję RGB -> CMYK -> RGB z TIFF jako formatem pośrednim.
 def _roundtrip_rgb_via_cmyk_tiff(rgb: np.ndarray, tmp_path: Path) -> np.ndarray:
     rgb = _ensure_rgb(rgb).astype(np.uint8)
 
@@ -66,7 +78,7 @@ def _roundtrip_rgb_via_cmyk_tiff(rgb: np.ndarray, tmp_path: Path) -> np.ndarray:
     return iio.imread(out_file, plugin='pillow', mode="RGB")
 
 
-
+# Sprawdza, że konwersja RGB -> CMYK -> RGB dla zestawu kontrolnych próbek kolorów zachowuje kolory w granicach dopuszczalnego odchylenia.
 def test_rgb_cmyk_roundtrip_preserves_reference_swatches(tmp_path):
     original = _build_color_chart()
     roundtrip = _roundtrip_rgb_via_cmyk_tiff(original, tmp_path)
@@ -82,7 +94,8 @@ def test_rgb_cmyk_roundtrip_preserves_reference_swatches(tmp_path):
 
 
 
-
+# Sprawdza konwersje RGB -> CMYK -> RGB dla rzeczywistego obrazu w granicach dopuszczalnego odchylenia barw.
+# Porównuje wynik z konwersją wykonaną w pamięci przez Pillow, aby upewnić się, że proces zapisu i odczytu TIFF nie wprowadza dodatkowych błędów.
 def test_rgb_cmyk_rgb_roundtrip_matches_in_memory_pillow_conversion(tmp_path):
     source = Path(__file__).parent / 'test_conversion_source' / 'source.jpg'
 
