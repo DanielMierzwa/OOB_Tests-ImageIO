@@ -65,6 +65,8 @@ def _roundtrip_rgb_via_cmyk_tiff(rgb: np.ndarray, tmp_path: Path) -> np.ndarray:
 
     return iio.imread(out_file, plugin='pillow', mode="RGB")
 
+
+
 def test_rgb_cmyk_roundtrip_preserves_reference_swatches(tmp_path):
     original = _build_color_chart()
     roundtrip = _roundtrip_rgb_via_cmyk_tiff(original, tmp_path)
@@ -79,4 +81,23 @@ def test_rgb_cmyk_roundtrip_preserves_reference_swatches(tmp_path):
     assert mean_diff <= 0.5, f"Mean absolute difference {mean_diff} exceeds threshold of 0.5"
 
 
+
+
+def test_rgb_cmyk_rgb_roundtrip_matches_in_memory_pillow_conversion(tmp_path):
+    source = Path(__file__).parent / 'test_conversion_source' / 'source.jpg'
+
+    original = _ensure_rgb(iio.imread(source, plugin='pillow')).astype(np.uint8)
+
+    expected_rgb = np.asarray(
+        Image.fromarray(original, mode='RGB').convert('CMYK').convert('RGB'),
+        dtype=np.uint8
+    )
+
+    roundtrip = _roundtrip_rgb_via_cmyk_tiff(original, tmp_path)
+
+    assert roundtrip.shape == expected_rgb.shape, f"Roundtrip image shape {roundtrip.shape} does not match expected shape {expected_rgb.shape}"
+    assert roundtrip.dtype == expected_rgb.dtype == np.uint8, f"Roundtrip image dtype {roundtrip.dtype} is not uint8"
+
+    max_diff = _max_abs_diff(expected_rgb, roundtrip)
+    assert max_diff <= 1, f"Max absolute difference {max_diff} exceeds threshold of 1"
 
