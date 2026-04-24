@@ -6,7 +6,8 @@ def run_tests():
         "tests/",
         "--cov=imageio",
         "--cov-report=xml:coverage.xml",
-        "--junitxml=results.xml"
+        "--junitxml=results.xml",
+        "--tb=short"
     ]
     
     exit_code = pytest.main(args)
@@ -15,4 +16,4 @@ def run_tests():
 
 if __name__ == "__main__":
     run_tests()
-    generate_report("results.xml", "coverage.xml", "raport.xml")
+    generate_report("results.xml", "coverage.xml", "raport.md")

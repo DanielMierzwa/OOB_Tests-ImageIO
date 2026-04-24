@@ -20,7 +20,7 @@ jobs:
       - name: Run Functional & Performance Tests
       
         run: |
-          pytest tests/ --cov=imageio --cov-report=xml:coverage.xml --junitxml=results.xml --tb=native
+          pytest tests/ --cov=imageio --cov-report=xml:coverage.xml --junitxml=results.xml --tb=short
         continue-on-error: false
 
       - name: Generate MD Report

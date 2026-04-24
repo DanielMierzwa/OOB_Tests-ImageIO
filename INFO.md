@@ -15,7 +15,7 @@
     ```pip install imageio pytest pytest-cov```
 2. Będąc w folderze projektu użyj komendy
 
-    ```pytest tests/ --cov=imageio --cov-report=xml:coverage.xml --junitxml=results.xml```
+    ```pytest tests/ --cov=imageio --cov-report=xml:coverage.xml --junitxml=results.xml --tb=short```
 3. Aby wygenerować raport użyj komendy
 
     ```python ./scripts/report_generator.py```

@@ -54,7 +54,7 @@ OOB_Tests-ImageIO/
    ```
 2. Uruchom testy korzystając z głównego katalogu testów:
    ```bash
-   pytest tests/ --cov=imageio --cov-report=xml:coverage.xml --junitxml=results.xml
+   pytest tests/ --cov=imageio --cov-report=xml:coverage.xml --junitxml=results.xml --tb=short
    ```
 3. Zbuduj raport z operacji:
    ```bash
