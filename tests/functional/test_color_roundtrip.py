@@ -1,0 +1,69 @@
+from pathlib import Path
+
+import imageio.v3 as iio
+import numpy as np
+from PIL import Image
+
+def _ensure_rgb(image: np.ndarray) -> np.ndarray:
+    if image.ndim == 2:
+        return np.stack([image, image, image], axis=-1)
+    if image.ndim == 3 and image.shape[2] == 4:
+        return image[:, :, :3]
+    return image
+
+def _build_color_chart() -> np.ndarray:
+    color_chart = np.array(
+        [
+            [0, 0, 0],         # black
+            [255, 255, 255],   # white
+            [255, 0, 0],       # red
+            [0, 255, 0],       # green
+            [0, 0, 255],       # blue
+            [0, 255, 255],     # cyan
+            [255, 0, 255],     # magenta
+            [255, 255, 0],     # yellow
+            [64, 64, 64],      # gray64
+            [128, 128, 128],   # gray128
+            [192, 192, 192],   # gray192
+            [255, 165, 0],     # orange
+            [50, 205, 50],     # lime
+            [0, 127, 255],     # azure
+            [138, 43, 226],    # violet
+            [255, 105, 180],   # pink
+        ],
+        dtype=np.uint8
+    ).reshape((4, 4, 3))
+
+    return np.repeat(np.repeat(color_chart, 32, axis=0), 32, axis=1)
+
+def _max_abs_diff(a: np.ndarray, b: np.ndarray) -> int:
+    return int(np.abs(a.astype(np.int16) - b.astype(np.int16)).max())
+
+def _mean_abs_diff(a: np.ndarray, b: np.ndarray) -> float:
+    return float(np.abs(a.astype(np.int16) - b.astype(np.int16)).mean())
+
+def _roundtrip_rgb_via_cmyk_tiff(rgb: np.ndarray, tmp_path: Path) -> np.ndarray:
+    rgb = _ensure_rgb(rgb).astype(np.uint8)
+
+    cmyk_image = Image.fromarray(rgb, mode='RGB').convert('CMYK')
+    cmyk_array = np.asarray(cmyk_image, dtype=np.uint8)
+
+    out_file = tmp_path / 'roundtrip_cmyk.tif'
+
+    iio.imwrite(
+        out_file,
+        cmyk_array,
+        plugin='pillow',
+        format='TIFF',
+        mode="CMYK",
+    )
+
+    assert out_file.exists(), "Output file was not created."
+
+    with Image.open(out_file) as saved_img:
+        assert saved_img.mode == "CMYK", f"Expected saved image mode to be CMYK, but got {saved_img.mode}"
+
+    return iio.imread(out_file, plugin='pillow', mode="RGB")
+
+
+
