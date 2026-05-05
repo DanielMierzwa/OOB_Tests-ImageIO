@@ -50,11 +50,11 @@ OOB_Tests-ImageIO/
 ### Lokalnie
 1. Zainstaluj wszystkie potrzebne biblioteki oraz instancje:
    ```bash
-   pip install imageio pytest pytest-cov
+   python -m pip install -r requirements.txt
    ```
 2. Uruchom testy korzystając z głównego katalogu testów:
    ```bash
-   pytest tests/ --cov=imageio --cov-report=xml:coverage.xml --junitxml=results.xml --tb=short
+   python -m pytest
    ```
 3. Zbuduj raport z operacji:
    ```bash
