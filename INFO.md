@@ -12,10 +12,10 @@
 ### Korzystając z konsoli
 1. Upewnij się, że masz zainstalowane wszystkie potrzebne biblioteki python oraz interpreter pythona.
 
-    ```pip install imageio pytest pytest-cov```
+    ```python -m pip install -r requirements.txt```
 2. Będąc w folderze projektu użyj komendy
 
-    ```pytest tests/ --cov=imageio --cov-report=xml:coverage.xml --junitxml=results.xml --tb=short```
+    ```python -m pytest```
 3. Aby wygenerować raport użyj komendy
 
     ```python ./scripts/report_generator.py```
@@ -23,7 +23,7 @@
 ### Korzystając z pliku `run_tests.py`
 1. Upewnij się, że masz zainstalowane wszystkie potrzebne biblioteki python oraz interpreter pythona.
 
-    ```pip install imageio pytest pytest-cov```
+    ```python -m pip install -r requirements.txt```
 2. Uruchom plik `run_tests.py`
 
     ```python ./run_tests.py``` lub poprzez np. Visual Studio Code

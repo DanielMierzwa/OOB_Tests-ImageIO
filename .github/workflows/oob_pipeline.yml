@@ -15,12 +15,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install imageio pytest pytest-cov
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
         
       - name: Run Functional & Performance Tests
       
         run: |
-          pytest tests/ --cov=imageio --cov-report=xml:coverage.xml --junitxml=results.xml --tb=short
+          python -m pytest
         continue-on-error: false
 
       - name: Generate MD Report
