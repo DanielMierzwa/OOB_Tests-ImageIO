@@ -1,5 +1,5 @@
-from datetime import datetime, timezone, timedelta
-from zoneinfo import ZoneInfo
+from datetime import datetime
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from importlib.metadata import version
 import xml.etree.ElementTree as ET
 import os, sys, platform, socket, configparser
@@ -51,8 +51,12 @@ def get_coverage_data(cov_file):
     }
 
 def get_report_timestamp():
-    warsaw_time = datetime.now(ZoneInfo("Europe/Warsaw"))
-    return warsaw_time.strftime("%Y-%m-%d %H:%M %Z")
+    try:
+        report_time = datetime.now(ZoneInfo("Europe/Warsaw"))
+    except ZoneInfoNotFoundError:
+        report_time = datetime.now().astimezone()
+
+    return report_time.strftime("%Y-%m-%d %H:%M %Z")
 
 def get_hostname():
     return os.getenv("RUNNER_NAME") or socket.gethostname()
@@ -121,15 +125,31 @@ def create_test_summary(output_file, test_results):
         f.write("---\n\n")
 
 def create_enviroment_details(output_file):
-    with open(output_file, 'a') as f:
+    dependencies = get_dependencies()
+    pytest_config = get_pytest_config()
+
+    with open(output_file, 'a', encoding="utf-8") as f:
         f.write("## Test Environment Details\n\n")
         f.write(f"**Timestamp:** `{get_report_timestamp()}`\n")
         f.write(f"**Environment:** `Python {sys.version.split()[0]} | {platform.system()} {platform.release()}`\n\n")
         f.write(f"* **Host:** `{get_hostname()}`\n" + 
                 f"* **Interpreter:** `CPython {sys.version.split()[0]}`\n" +
-                f"* **Dependencies:**\n" + 
-                f"  * `pytest`: `{version('pytest')}`\n")
-        f.write(f"* **Plugin Config:** `pytest-cov`\n")
+                f"* **Dependencies:**\n")
+        for dependency in dependencies:
+            f.write(f"  * `{dependency}`\n")
+        f.write(f"* **Pytest Config:**\n")
+        if "error" in pytest_config:
+            f.write(f"  * `{pytest_config['error']}`\n")
+        else:
+            if pytest_config["testpaths"]:
+                f.write(f"  * `testpaths`: `{pytest_config['testpaths']}`\n")
+
+            if pytest_config["addopts"]:
+                f.write("  * `addopts`:\n")
+                for option in pytest_config["addopts"].splitlines():
+                    option = option.strip()
+                    if option:
+                        f.write(f"    * `{option}`\n")
         f.write("\n\n---\n\n")
 
 def create_failure_report(output_file, test_results):
