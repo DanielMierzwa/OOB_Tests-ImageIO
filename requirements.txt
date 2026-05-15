@@ -3,3 +3,4 @@ numpy
 Pillow
 pytest
 pytest-cov
+tzdata
