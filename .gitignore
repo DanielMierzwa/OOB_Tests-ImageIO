@@ -67,6 +67,10 @@ venv.bak/
 # macOS
 .DS_Store
 
+# ImageIO local build
+.build/
+imageio_build_info.json
+
 # Windows
 Thumbs.db
 /.vs
