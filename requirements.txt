@@ -1,6 +1,6 @@
-imageio
 numpy
 Pillow
 pytest
 pytest-cov
 tzdata
+build
