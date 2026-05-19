@@ -26,8 +26,6 @@ def test_imwrite_imread_roundtrip():
     # Odczyt obrazu
     loaded = iio.imread(file_path)
 
-    print(f"scieak:{file_path}")
-    print("xd")
     # Usunięcie niepotrzebnego pliku
     if os.path.isfile(file_path):
         os.unlink(file_path)
