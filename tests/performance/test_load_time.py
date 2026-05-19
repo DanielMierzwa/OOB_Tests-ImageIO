@@ -8,11 +8,11 @@ def test_load_time():
     # Ukrycie warningów DecompressionBombWarning
     warnings.simplefilter('ignore', Image.DecompressionBombWarning)
 
-    image_path = Path(__file__).parent +"/test_load_time_source.jpg"
+    image_path = str(Path(__file__).parent) +"\\test_load_time_source.jpg"
     repeats = 50
 
     times = []
-
+    print(image_path)
     for _ in range(repeats):
         start = time.perf_counter()
         img = iio.imread(image_path)
@@ -23,3 +23,5 @@ def test_load_time():
     avg_time = sum(times) / repeats
 
     assert avg_time < 0.7
+if __name__ == "__main__":
+    test_load_time()
