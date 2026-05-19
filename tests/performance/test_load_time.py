@@ -1,4 +1,5 @@
 import warnings
+from pathlib import Path
 from PIL import Image
 import imageio.v3 as iio
 import time
@@ -7,7 +8,7 @@ def test_load_time():
     # Ukrycie warningów DecompressionBombWarning
     warnings.simplefilter('ignore', Image.DecompressionBombWarning)
 
-    image_path = "test_load_time_source.jpg"
+    image_path = Path(__file__).parent +"test_load_time_source.jpg"
     repeats = 50
 
     times = []
