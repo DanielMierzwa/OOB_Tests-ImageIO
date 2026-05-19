@@ -8,7 +8,7 @@ def test_load_time():
     # Ukrycie warningów DecompressionBombWarning
     warnings.simplefilter('ignore', Image.DecompressionBombWarning)
 
-    image_path = Path(__file__).parent +"test_load_time_source.jpg"
+    image_path = Path(__file__).parent +"/test_load_time_source.jpg"
     repeats = 50
 
     times = []
