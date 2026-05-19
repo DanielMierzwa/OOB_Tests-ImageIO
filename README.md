@@ -34,9 +34,9 @@ OOB_Tests-ImageIO/
 │
 ├── .github/workflows/    # Skrypty mechanizmu CI/CD (GitHub Actions)
 ├── AcceptanceTests/      # Definicje dla testów akceptacyjnych
-├── Doc/                  # Dokumentacja poboczna: Harmonogram.md, Strategia_testowania.md, TASK.md
+├── Doc/                  # Dokumentacja poboczna: Harmonogram.md, Strategia_testowania.md, Build_from_commit.md, TASK.md
 ├── Results/              # Folder zawierający logi, raporty i przykładowe rezultaty testów 
-├── scripts/              # Narzędzia pomocnicze i skrypty robocze
+├── scripts/              # Narzędzia pomocnicze: report_generator.py, build_imageio_from_commit.py
 ├── tests/                # Główny katalog z testami podziałem np. na functional/ i performance/
 │
 ├── INFO.md               # Instrukcje uruchamiania testów w GitHub Actions oraz lokalnie
@@ -52,13 +52,20 @@ OOB_Tests-ImageIO/
    ```bash
    python -m pip install -r requirements.txt
    ```
-2. Uruchom testy korzystając z głównego katalogu testów:
+2. Zbuduj i zainstaluj ImageIO z oficjalnego repozytorium GitHub (commit `971b83e` / v2.37.3):
+   ```bash
+   python scripts/build_imageio_from_commit.py
+   ```
+3. Uruchom testy korzystając z głównego katalogu testów:
    ```bash
    python -m pytest
    ```
-3. Zbuduj raport z operacji:
+4. Zbuduj raport z operacji:
    ```bash
    python ./scripts/report_generator.py
    ```
+
+> **Uwaga:** Projekt nie instaluje `imageio` z PyPI – paczka jest budowana ze
+> źródeł na GitHubie. Więcej szczegółów: [Doc/Build_from_commit.md](./Doc/Build_from_commit.md).
 
 *Bardziej szczegółowa instrukcja, w tym dla GitHub Actions znajduje się w pliku [INFO.md](./INFO.md)*

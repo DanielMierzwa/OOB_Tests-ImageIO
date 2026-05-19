@@ -2,7 +2,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from importlib.metadata import version
 import xml.etree.ElementTree as ET
-import os, sys, platform, socket, configparser
+import os, sys, platform, socket, configparser, json
 
 
 def get_test_results(xml_file):
@@ -91,6 +91,18 @@ def get_pytest_config(pytest_ini_file="pytest.ini"):
         "addopts": parser["pytest"].get("addopts", "").strip(),
     }
 
+def get_build_info(build_info_file="imageio_build_info.json"):
+    """Load ImageIO build metadata if available."""
+    if not os.path.exists(build_info_file):
+        return None
+
+    try:
+        with open(build_info_file, encoding="utf-8") as f:
+            return json.load(f)
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"Warning: Could not read {build_info_file}: {e}")
+        return None
+
 
 def create_header(output_file, test_results, coverage_data):
     if test_results["failures"] + test_results["errors"] == 0:
@@ -110,6 +122,24 @@ def create_header(output_file, test_results, coverage_data):
                 " ![Python versions](https://img.shields.io/pypi/pyversions/imageio?style=flat-square)" + 
                 " ![PyPI - License](https://img.shields.io/pypi/l/imageio?style=flat-square)\n\n\n" + 
                 "---\n\n")
+
+def create_build_info_section(output_file, build_info):
+    """Write ImageIO build metadata section to the report."""
+    with open(output_file, 'a', encoding='utf-8') as f:
+        f.write("## Tested ImageIO Build\n\n")
+        if build_info is None:
+            f.write("> *Build metadata not found (`imageio_build_info.json`). "
+                    "ImageIO may have been installed from PyPI or metadata file is missing.*\n\n")
+        else:
+            f.write("| Property | Value |\n")
+            f.write("| :--- | :--- |\n")
+            f.write(f"| **Repository** | `{build_info.get('repository', 'N/A')}` |\n")
+            f.write(f"| **Commit (short)** | `{build_info.get('commit_short', 'N/A')}` |\n")
+            f.write(f"| **Commit (full)** | `{build_info.get('commit_full', 'N/A')}` |\n")
+            f.write(f"| **Install method** | `{build_info.get('install_method', 'N/A')}` |\n")
+            f.write(f"| **Wheel file** | `{build_info.get('wheel_file', 'N/A')}` |\n")
+            f.write(f"| **Build timestamp** | `{build_info.get('build_timestamp', 'N/A')}` |\n\n")
+        f.write("---\n\n")
         
 def create_test_summary(output_file, test_results):
     with open(output_file, 'a') as f:
@@ -184,6 +214,11 @@ def generate_report(xml_file, cov_file, output_file):
     COVERAGE_DATA = get_coverage_data(cov_file)
 
     create_header(output_file, TEST_RESULTS, COVERAGE_DATA)
+
+    # Build info section – graceful when metadata is missing
+    build_info = get_build_info()
+    create_build_info_section(output_file, build_info)
+
     create_test_summary(output_file, TEST_RESULTS)
     create_enviroment_details(output_file)
     create_failure_report(output_file, TEST_RESULTS)
