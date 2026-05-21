@@ -4,14 +4,14 @@ import os
 import logging
 import imageio.v3 as iio
 import pytest
-
+from pathlib import Path
 logger = logging.getLogger(__name__)
 
 
 @pytest.fixture
 def source_performance_image():
     """Pobranie obrazu do testowania kompresji z URL."""
-    url = 'https://github.com/DanielMierzwa/OOB_Tests-ImageIO/blob/main/tests/performance/source_performance.png?raw=true'
+    url = str(Path(__file__).parent) +"/source_performance.png"
     image = iio.imread(url)
     return image
 
