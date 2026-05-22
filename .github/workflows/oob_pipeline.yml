@@ -7,60 +7,70 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  functional-tests:
+    name: Functional | Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        python-version: ['3.10', '3.11', '3.12', '3.13']
-    name: Python ${{ matrix.python-version }}
+        python-version: ['3.11', '3.12', '3.13', '3.14']
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v6
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
+          python -m pip install -r requirements.txt pytest-benchmark
 
-      - name: Build ImageIO from selected GitHub commit
+      - name: Build ImageIO
         run: python scripts/build_imageio_from_commit.py
 
-      - name: Verify ImageIO installation
-        run: |
-          python -c "import imageio, importlib.metadata; print('Location:', imageio.__file__); print('Version:', importlib.metadata.version('imageio'))"
-
-      - name: Run Functional & Performance Tests
-        run: |
-          python -m pytest
-        continue-on-error: false
+      - name: Run Functional Tests
+        run: python -m pytest tests/functional/ --benchmark-skip
 
       - name: Generate MD Report
         if: always()
         run: python scripts/report_generator.py
 
-      - name: Publish Summary to GitHub UI
+      - name: Publish Summary
         if: always()
         run: |
           if [ -f raport.md ]; then
             cat raport.md >> $GITHUB_STEP_SUMMARY
-          else
-            echo "## Błąd: Plik raport.md nie został wygenerowany!" >> $GITHUB_STEP_SUMMARY
           fi
-
-      - name: Archive Test Artifacts
-        if: always()
-        uses: actions/upload-artifact@v6
+  performance-tests:
+    name: Performance Benchmarks | Python 3.13
+    needs: functional-tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          name: testing-outputs-py${{ matrix.python-version }}
-          path: |
-            raport.md
-            coverage.xml
-            results.xml
-            imageio_build_info.json
-          retention-days: 7
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt pytest-benchmark
+
+      - name: Build ImageIO
+        run: python scripts/build_imageio_from_commit.py
+
+      - name: Run Benchmarks
+        run: python -m pytest tests/performance/ --benchmark-only --benchmark-json=benchmark-results.json
+
+      - name: Store Benchmark Result
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          tool: 'pytest'
+          output-file-path: benchmark-results.json
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          auto-push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          comment-always: true
+          alert-threshold: '130%'
+          fail-on-alert: true
