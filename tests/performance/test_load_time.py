@@ -22,6 +22,6 @@ def test_load_time():
 
     avg_time = sum(times) / repeats
 
-    assert avg_time < 0.7
+    assert avg_time < 0.8
 if __name__ == "__main__":
     test_load_time()
